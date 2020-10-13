@@ -11,7 +11,7 @@
     <label for="year">Year: </label>
     <input formControlName="year" type="number" class="form-control" id="year">
     <p *ngIf="editForm.controls['year'].hasError('min') || editForm.controls['year'].hasError('max')" class="alert-danger">
-        Wrong age!
+        Wrong year!
     </p>
     <p *ngIf="editForm.controls['year'].hasError('required')" class="alert-danger">
         Year field is required!
