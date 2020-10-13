@@ -6,11 +6,10 @@
 
 textarea {
     max-width: 1200px;
-    min-height: 400px;
+    min-height: 200px;
     margin: auto;
     padding: 20px;
     box-shadow: 0 0 5px 0 black;
-    overflow: hidden;
 }
 
 .buttons {
