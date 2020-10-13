@@ -36,7 +36,7 @@ export class EditJsonComponent implements OnInit, OnDestroy {
       this.user = users.filter((user: User, index: number) => index === +this.id)[0];
     });
     this.editForm = this.fb.group({
-      name: [this.user.name, [Validators.required, Validators.minLength(2)]],
+      name: [this.user.name, [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-zА-Яа-я ]*$/)]],
       year: [this.user.year, [Validators.required, Validators.min(1895), Validators.max(2020)]],
     });
   }

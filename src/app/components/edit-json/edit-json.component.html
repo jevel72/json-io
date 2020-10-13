@@ -8,6 +8,9 @@
     <p *ngIf="editForm.controls['name'].hasError('required')" class="alert-danger">
         Name field is required!
     </p>
+    <p *ngIf="editForm.controls['name'].hasError('pattern')" class="alert-danger">
+        Name field isn't correct typed! Use only letters and space symbols!
+    </p>
     <label for="year">Year: </label>
     <input formControlName="year" type="number" class="form-control" id="year">
     <p *ngIf="editForm.controls['year'].hasError('min') || editForm.controls['year'].hasError('max')" class="alert-danger">
