@@ -1,0 +1,30 @@
+table {
+    max-width: 1200px;
+    box-shadow: 0 0 5px 0 black;
+    border-radius: 15px;
+    margin: auto;
+}
+
+:host {
+    display: block;
+    margin: auto;
+    margin-top: 25vh;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+.selected {
+    background-color: black;
+    color: white;
+}

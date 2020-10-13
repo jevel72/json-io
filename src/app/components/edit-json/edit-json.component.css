@@ -1,0 +1,29 @@
+:host {
+    display: block;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 25vh;
+}
+
+h2 {
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+button {
+    margin: 15px;
+}
+
+input {
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    padding: 15px;
+}

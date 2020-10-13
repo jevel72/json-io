@@ -1,0 +1,39 @@
+h2 {
+    text-align: center;
+    margin: 20px;
+}
+
+textarea {
+    max-width: 1200px;
+    min-height: 150px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.buttons {
+    display: flex;
+    margin: auto;
+    max-width: 1200px;
+    justify-content: space-between;
+}
+
+button {
+    margin: 20px;
+}
+
+p {
+    min-height: 50px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+textarea {
+    box-shadow: 0 0 5px 0 black;
+    overflow: hidden;
+}
+
+:host {
+    display: block;
+    margin-top: 25vh;
+}

@@ -1,0 +1,8 @@
+<h2>Copy JSON</h2>
+<textarea class="form-control" #json>
+    {{ users$ | async | json }}
+</textarea>
+<div class="buttons">
+    <button class="btn btn-primary" ngxClipboard [cbContent]="json.innerHTML" (click)="onCopy()">{{ copy }}</button>
+    <button class="btn btn-danger" routerLink="/">Home</button>
+</div>

@@ -1,0 +1,31 @@
+:host {
+    display: block;
+    margin: auto;
+    margin-top: 15vh;
+}
+
+textarea {
+    max-width: 1200px;
+    min-height: 400px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 5px 0 black;
+    overflow: hidden;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1200px;
+}
+
+button {
+    margin: 15px;
+    padding: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px;
+}

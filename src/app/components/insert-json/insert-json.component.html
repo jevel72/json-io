@@ -1,0 +1,10 @@
+<h2>Paste JSON:</h2>
+<textarea [placeholder]="placeholderText" class="form-control" [formControl]="dataInput"></textarea>
+<p *ngIf="requiredError" class="alert alert-warning" role="alert">
+    Paste JSON
+</p>
+<p *ngIf="wrongJsonError" class="alert alert-danger" role="alert">Invalid JSON</p>
+<div class="buttons">
+    <button (click)="handleContinue()" [disabled]="disabled" class="btn btn-success">Continue</button>
+    <button (click)="addSampleJson()" class="btn btn-warning">Example</button>
+</div>

@@ -1,0 +1,23 @@
+<h2>Edit JSON</h2>
+<form [formGroup]="editForm" class="form-group">
+    <label for="name">Name: </label>
+    <input formControlName="name" type="text" class="form-control" id="name">
+    <p *ngIf="editForm.controls['name'].hasError('minlength')" class="alert-danger">
+        Name required 2 symbols (minimum)!
+    </p>
+    <p *ngIf="editForm.controls['name'].hasError('required')" class="alert-danger">
+        Name field is required!
+    </p>
+    <label for="year">Year: </label>
+    <input formControlName="year" type="number" class="form-control" id="year">
+    <p *ngIf="editForm.controls['year'].hasError('min') || editForm.controls['year'].hasError('max')" class="alert-danger">
+        Wrong age!
+    </p>
+    <p *ngIf="editForm.controls['year'].hasError('required')" class="alert-danger">
+        Year field is required!
+    </p>
+</form>
+<div class="buttons">
+    <button [disabled]="editForm.invalid" class="btn btn-success" (click)="onSave()">Save</button>
+    <button routerLink="/output" class="btn btn-primary">Return</button>
+</div>
