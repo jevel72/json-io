@@ -15,6 +15,7 @@ import { JsonOutputComponent } from './components/json-output/json-output.compon
 import { usersReducer } from './store/reducers/users.reducers';
 import { EditJsonComponent } from './components/edit-json/edit-json.component';
 import { CopyJsonComponent } from './components/copy-json/copy-json.component';
+import { NewJsonComponent } from './components/new-json/new-json.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CopyJsonComponent } from './components/copy-json/copy-json.component';
     JsonOutputComponent,
     EditJsonComponent,
     CopyJsonComponent,
+    NewJsonComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,9 +23,9 @@
 </table>
 <div class="buttons">
     <div class="operation-buttons">
-        <button class="btn btn-danger" [disabled]="row === -1" routerLink="/edit" [queryParams]="{'id': row }">Edit</button>
+        <button routerLink="/edit" class="btn btn-danger" [disabled]="row === -1" [queryParams]="{'id': row }">Edit</button>
         <button class="btn btn-danger" [disabled]="row === -1" (click)="deleteEntity(row)">Delete</button>
-        <button class="btn btn-success">+</button>
+        <button routerLink="/new" class="btn btn-success">+</button>
     </div>
     <div class="navigate-buttons">
         <button routerLink="/" class="btn btn-warning">Home</button>

@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import { insertJson } from '../actions/insert-json.actions';
 import { deleteUser } from '../actions/delete-user.actions';
+import { addUser } from '../actions/add-user.actions';
 import { editYear } from '../actions/edit-year.actions';
 import { editName } from '../actions/edit-name.actions';
 import { editUser } from '../actions/edit-user.actions';
@@ -12,15 +13,24 @@ import { User } from '../../interfaces/user.interface';
 const initialState: Users = JSON.parse(window.localStorage.getItem('users')) || [];
 
 const _usersReducer = createReducer(initialState, 
-    on(insertJson, (state: Users, { payload }) => ([
+    on(insertJson, (state: Users, { payload }): Users => ([
         ...payload
     ])),
-    on(deleteUser, (state: Users, { payload }) => {
+    on(deleteUser, (state: Users, { payload }): Users => {
         const newState: Users = [...state.filter((user: User, index: number) => index !== payload.id)];
         window.localStorage.setItem('users', JSON.stringify(newState));
         return newState;
     }),
-    on(editYear, (state: Users, { payload }) => {
+    on(addUser, (state: Users, { payload }): Users => {
+        const newUser: User = {
+            name: payload.name,
+            year: payload.year,
+        };
+        const newState: Users = [...state.concat({ ...newUser })];
+        window.localStorage.setItem('users', JSON.stringify(newState));
+        return newState;
+    }),
+    on(editYear, (state: Users, { payload }): Users => {
         const newState: Users = [
             ...state.map((user: User, index: number) => {
                 if (index === payload.id) {
@@ -36,7 +46,7 @@ const _usersReducer = createReducer(initialState,
         window.localStorage.setItem('users', JSON.stringify(newState));
         return newState;
     }),
-    on(editName, (state: Users, { payload }) => {
+    on(editName, (state: Users, { payload }): Users => {
         const newState: Users = [
             ...state.map((user: User, index: number) => {
                 if (index === payload.id) {
@@ -52,7 +62,7 @@ const _usersReducer = createReducer(initialState,
         window.localStorage.setItem('users', JSON.stringify(newState));
         return newState;
     }),
-    on(editUser, (state: Users, { payload }) => {
+    on(editUser, (state: Users, { payload }): Users => {
         const newState: Users = [
             ...state.map((user: User, index: number) => {
                 if (index === +payload.id) {

@@ -1,0 +1,39 @@
+<h2>New JSON</h2>
+<form class="form-group" [formGroup]="addForm">
+    <label for="name">Name: </label>
+    <input formControlName="name" type="text" class="form-control" id="name">
+    <ng-container *ngIf="minlengthNameError">
+        <p class="alert-danger">
+            Name required 2 symbols (minimum)!
+        </p>
+    </ng-container>
+    <ng-container *ngIf="requiredNameError">
+        <p class="alert-danger">
+            Name field is required!
+        </p>
+    </ng-container>
+    <ng-container *ngIf="patternNameError">
+        <p class="alert-danger">
+            Name field isn't correct typed! Use only letters and space symbols!
+        </p>
+    </ng-container>
+    <label for="year">Year: </label>
+    <input formControlName="year" type="number" class="form-control" id="year">
+    <ng-container *ngIf="minmaxYearError">
+        <p class="alert-danger">
+            Wrong year!
+        </p>
+    </ng-container>
+    <ng-container *ngIf="requiredYearError">
+        <p class="alert-danger">
+            Year field is required!
+        </p>
+    </ng-container>
+</form>
+<div class="buttons">
+    <button class="btn btn-success" [disabled]="addForm.invalid" (click)="onAdd()">Add</button>
+    <div class="navigate-buttons">
+        <button routerLink="/" class="btn btn-warning">Home</button>
+        <button routerLink="/output" class="btn btn-primary">Return</button>
+    </div>
+</div>

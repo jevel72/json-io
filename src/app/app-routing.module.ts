@@ -5,6 +5,7 @@ import { JsonOutputComponent } from './components/json-output/json-output.compon
 import { InsertJsonComponent } from './components/insert-json/insert-json.component';
 import { EditJsonComponent } from './components/edit-json/edit-json.component';
 import { CopyJsonComponent } from './components/copy-json/copy-json.component';
+import { NewJsonComponent } from './components/new-json/new-json.component';
 
 const JsonOutputRoute: Route = {
     path: 'output',
@@ -21,6 +22,11 @@ const CopyJsonRoute: Route = {
     component: CopyJsonComponent,
 };
 
+const NewJsonRoute: Route = {
+    path: 'new',
+    component: NewJsonComponent,
+};
+
 const InsertJsonRoute: Route = {
     path: '',
     pathMatch: 'full',
@@ -31,6 +37,7 @@ const routes: Routes = [
     JsonOutputRoute,
     EditJsonRoute,
     CopyJsonRoute,
+    NewJsonRoute,
     InsertJsonRoute,
 ];
 
