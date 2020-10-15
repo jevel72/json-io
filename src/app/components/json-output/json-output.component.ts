@@ -14,6 +14,8 @@ import { EditYearMetadata } from '../../interfaces/edit-year-metadata.interface'
 import { EditNameMetadata } from '../../interfaces/edit-name-metadata.interface';
 import { Users } from '../../types/users.type';
 
+import { NAME_PATTERN } from 'src/app/patterns/name.pattern';
+
 @Component({
   selector: 'app-json-output',
   templateUrl: './json-output.component.html',
@@ -21,21 +23,21 @@ import { Users } from '../../types/users.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JsonOutputComponent implements OnInit {
+  
+  public users$: Observable<Users>;
+
+  public row: number = -1;
 
   constructor(
     @Inject(LOCAL_STORAGE_TOKEN) private readonly localStorage: Storage,
     private readonly title: Title,
-    private readonly store: Store<any>
+    private readonly store: Store<any>,
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('JSON Output');
     this.users$ = this.store.pipe(select(state => state.users));
   }
-
-  public row: number = -1;
-
-  public users$: Observable<Users>;
 
   public editYear(ev: Event, id: number): void {
     ev.preventDefault();
@@ -53,6 +55,7 @@ export class JsonOutputComponent implements OnInit {
     ev.preventDefault();
     const name: string = (ev.target as HTMLElement).innerText;
     if (name.length < 2) return;
+    if (!(NAME_PATTERN.test(name))) return;
     const payload: EditNameMetadata = {
       id,
       name,

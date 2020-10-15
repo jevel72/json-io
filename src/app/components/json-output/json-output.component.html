@@ -6,11 +6,13 @@
         <th>Year</th>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users$ | async; index as i" (click)="setChangedRow(i)" [ngClass]="i === row ? 'selected' : null">
-            <td>{{ i + 1 }}</td>
-            <td #name (keydown.enter)="editName($event, i)" contenteditable>{{ user.name }}</td>
-            <td #year (keydown.enter)="editYear($event, i)" contenteditable>{{ user.year }}</td>
-        </tr>
+        <ng-container *ngFor="let user of users$ | async; index as i">
+            <tr [ngClass]="i === row ? 'selected' : null" (click)="setChangedRow(i)">
+                <td>{{ i + 1 }}</td>
+                <td #name (keydown.enter)="editName($event, i)" contenteditable>{{ user.name }}</td>
+                <td #year (keydown.enter)="editYear($event, i)" contenteditable>{{ user.year }}</td>
+            </tr>
+        </ng-container>
     </tbody>
 </table>
 <div class="buttons">

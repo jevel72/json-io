@@ -14,6 +14,8 @@ import { Users } from '../../types/users.type';
 import { Controls } from 'src/app/types/controls.type';
 import { User } from '../../interfaces/user.interface';
 
+import { NAME_PATTERN } from 'src/app/patterns/name.pattern';
+
 @Component({
   selector: 'app-edit-json',
   templateUrl: './edit-json.component.html',
@@ -103,8 +105,8 @@ export class EditJsonComponent implements OnInit, OnDestroy {
   
   private _setUpForm(): void {
     this.editForm = this.fb.group({
-      name: [this.user.name, [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-zА-Яа-я ]*$/)]],
-      year: [this.user.year, [Validators.required, Validators.min(1895), Validators.max(2020)]],
+      name: [this.user?.name, [Validators.required, Validators.minLength(2), Validators.pattern(NAME_PATTERN)]],
+      year: [this.user?.year, [Validators.required, Validators.min(1895), Validators.max(2020)]],
     });
   }
 

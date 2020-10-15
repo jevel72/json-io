@@ -1,0 +1,1 @@
+export const NAME_PATTERN: RegExp = /^[A-Za-zА-Яа-я ]*$/;
