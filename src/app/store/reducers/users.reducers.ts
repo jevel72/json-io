@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { insertJson } from '../actions/insert-json.actions';
+import { deleteUser } from '../actions/delete-user.actions';
 import { editYear } from '../actions/edit-year.actions';
 import { editName } from '../actions/edit-name.actions';
 import { editUser } from '../actions/edit-user.actions';
@@ -14,6 +15,11 @@ const _usersReducer = createReducer(initialState,
     on(insertJson, (state: Users, { payload }) => ([
         ...payload
     ])),
+    on(deleteUser, (state: Users, { payload }) => {
+        const newState: Users = [...state.filter((user: User, index: number) => index !== payload.id)];
+        window.localStorage.setItem('users', JSON.stringify(newState));
+        return newState;
+    }),
     on(editYear, (state: Users, { payload }) => {
         const newState: Users = [
             ...state.map((user: User, index: number) => {

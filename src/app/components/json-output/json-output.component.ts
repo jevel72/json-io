@@ -9,6 +9,7 @@ import { LOCAL_STORAGE_TOKEN } from '../../tokens/local-storage.token';
 
 import { editYear } from '../../store/actions/edit-year.actions';
 import { editName } from '../../store/actions/edit-name.actions';
+import { deleteUser } from '../../store/actions/delete-user.actions';
 
 import { EditYearMetadata } from '../../interfaces/edit-year-metadata.interface';
 import { EditNameMetadata } from '../../interfaces/edit-name-metadata.interface';
@@ -69,6 +70,10 @@ export class JsonOutputComponent implements OnInit {
       return;
     }
     this.row = index;
+  }
+
+  public deleteEntity(index: number): void {
+    this.store.dispatch(deleteUser({ payload: { id: index }} ));
   }
 
 }

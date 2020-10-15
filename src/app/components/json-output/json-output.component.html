@@ -22,7 +22,11 @@
     </tbody>
 </table>
 <div class="buttons">
-    <button class="btn btn-danger" [disabled]="row === -1" routerLink="/edit" [queryParams]="{'id': row }">Edit</button>
+    <div class="operation-buttons">
+        <button class="btn btn-danger" [disabled]="row === -1" routerLink="/edit" [queryParams]="{'id': row }">Edit</button>
+        <button class="btn btn-danger" [disabled]="row === -1" (click)="deleteEntity(row)">Delete</button>
+        <button class="btn btn-success">+</button>
+    </div>
     <div class="navigate-buttons">
         <button routerLink="/" class="btn btn-warning">Home</button>
         <button routerLink="/copy" class="btn btn-primary">Copy</button>
