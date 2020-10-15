@@ -11,6 +11,7 @@ import { Store, select } from '@ngrx/store';
 import { editUser } from '../../store/actions/edit-user.actions';
 
 import { Users } from '../../types/users.type';
+import { Controls } from 'src/app/types/controls.type';
 import { User } from '../../interfaces/user.interface';
 
 @Component({
@@ -20,6 +21,19 @@ import { User } from '../../interfaces/user.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditJsonComponent implements OnInit, OnDestroy {
+  
+  public queryParams: SubscriptionLike;
+  
+  public userSubscription: SubscriptionLike;
+
+  public editForm: FormGroup;
+
+  
+  public id: number;
+  
+  public user: User;
+
+  private _controls: Controls;
 
   constructor(
     private readonly title: Title,
@@ -29,32 +43,18 @@ export class EditJsonComponent implements OnInit, OnDestroy {
     private readonly store: Store<any>,
   ) { }
 
-  ngOnInit(): void {
-    this.title.setTitle('Edit JSON');
-    this.queryParams = this.route.queryParams.pipe(map(params => params.id)).subscribe(id => this.id = id);
-    this.userSubscription = this.store.pipe(select(state => state.users)).subscribe((users: Users) => {
-      this.user = users.filter((user: User, index: number) => index === +this.id)[0];
-    });
-    this.editForm = this.fb.group({
-      name: [this.user.name, [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-zА-Яа-я ]*$/)]],
-      year: [this.user.year, [Validators.required, Validators.min(1895), Validators.max(2020)]],
-    });
+  public ngOnInit(): void {
+    this._setUpTitle();
+    this._setUpQueryParams();
+    this._setUpUserSubscription();
+    this._setUpForm();
+    this._setUpControls();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.queryParams.unsubscribe();
     this.userSubscription.unsubscribe();
   }
-
-  public queryParams: SubscriptionLike;
-
-  public id: number;
-
-  public editForm: FormGroup;
-
-  public userSubscription: SubscriptionLike;
-
-  public user: User;
 
   public onSave(): void {
     this.store.dispatch(editUser({
@@ -65,6 +65,51 @@ export class EditJsonComponent implements OnInit, OnDestroy {
       }
     }));
     this.router.navigateByUrl('/output');
+  }
+  
+  public get minlengthNameError(): boolean {
+    return this._controls['name'].hasError('minlength');
+  }
+
+  public get requiredNameError(): boolean {
+    return this._controls['name'].hasError('required');
+  }
+
+  public get patternNameError(): boolean {
+    return this._controls['name'].hasError('pattern');
+  }
+
+  public get minmaxYearError(): boolean {
+    return this._controls['year'].hasError('min') || this._controls['year'].hasError('max');
+  }
+
+  public get requiredYearError(): boolean {
+    return this._controls['year'].hasError('required');
+  }
+
+  private _setUpTitle(): void {
+    this.title.setTitle('Edit JSON');
+  }
+
+  private _setUpQueryParams(): void {
+    this.queryParams = this.route.queryParams.pipe(map(params => params.id)).subscribe(id => this.id = id);
+  }
+
+  private _setUpUserSubscription(): void {
+    this.userSubscription = this.store.pipe(select(state => state.users)).subscribe((users: Users) => {
+      this.user = users.filter((user: User, index: number) => index === +this.id)[0];
+    });
+  }
+  
+  private _setUpForm(): void {
+    this.editForm = this.fb.group({
+      name: [this.user.name, [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-zА-Яа-я ]*$/)]],
+      year: [this.user.year, [Validators.required, Validators.min(1895), Validators.max(2020)]],
+    });
+  }
+
+  private _setUpControls(): void {
+    this._controls = this.editForm.controls;
   }
 
 }

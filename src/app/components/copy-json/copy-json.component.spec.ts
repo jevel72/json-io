@@ -8,7 +8,7 @@ describe('CopyJsonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CopyJsonComponent ]
+      declarations: [ CopyJsonComponent ],
     })
     .compileComponents();
   });
@@ -22,4 +22,10 @@ describe('CopyJsonComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should change value in property "copy"', (done: DoneFn) => {
+    component.onCopy();
+    expect(component.copy).toBe('copied!');
+  });
+
 });
