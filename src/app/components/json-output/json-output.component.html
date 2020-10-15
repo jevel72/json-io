@@ -8,14 +8,23 @@
     <tbody>
         <ng-container *ngFor="let user of users$ | async; index as i">
             <tr [ngClass]="i === row ? 'selected' : null" (click)="setChangedRow(i)">
-                <td>{{ i + 1 }}</td>
-                <td #name (keydown.enter)="editName($event, i)" contenteditable>{{ user.name }}</td>
-                <td #year (keydown.enter)="editYear($event, i)" contenteditable>{{ user.year }}</td>
+                <td>
+                    {{ i + 1 }}
+                </td>
+                <td #name contenteditable (keydown.enter)="editName($event, i)">
+                    {{ user.name }}
+                </td>
+                <td #year contenteditable (keydown.enter)="editYear($event, i)">
+                    {{ user.year }}
+                </td>
             </tr>
         </ng-container>
     </tbody>
 </table>
 <div class="buttons">
     <button class="btn btn-danger" [disabled]="row === -1" routerLink="/edit" [queryParams]="{'id': row }">Edit</button>
-    <button class="btn btn-warning" routerLink="/copy">Copy</button>
+    <div class="navigate-buttons">
+        <button routerLink="/" class="btn btn-warning">Home</button>
+        <button routerLink="/copy" class="btn btn-primary">Copy</button>
+    </div>
 </div>

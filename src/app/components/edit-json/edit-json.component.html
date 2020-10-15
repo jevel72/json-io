@@ -32,5 +32,8 @@
 </form>
 <div class="buttons">
     <button class="btn btn-success" [disabled]="editForm.invalid" (click)="onSave()">Save</button>
-    <button routerLink="/output" class="btn btn-primary">Return</button>
+    <div class="navigate-buttons">
+        <button routerLink="/" class="btn btn-warning">Home</button>
+        <button routerLink="/output" class="btn btn-primary">Return</button>
+    </div>
 </div>
