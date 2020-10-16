@@ -10,7 +10,33 @@ import { editUser } from '../actions/edit-user.actions';
 import { Users } from '../../types/users.type';
 import { User } from '../../interfaces/user.interface';
 
-const initialState: Users = JSON.parse(window.localStorage.getItem('users')) || [];
+import { NAME_PATTERN } from '../../patterns/name.pattern';
+
+let initialState: Users;
+
+try {
+    const parsedJSON: Users = JSON.parse((window.localStorage as Storage).getItem('users'));
+    if (!(Array.isArray(parsedJSON))) throw new Error('This is NOT array!');
+    parsedJSON.forEach((user: User) => {
+        if (
+            Object.is(user, null) ||
+                !(Reflect.has(user, 'name')) ||
+                !(Reflect.has(user, 'year')) ||
+                !(typeof user.name === 'string') ||
+                !(!(isNaN(+user.year))) ||
+                !(+user.year < 2021) ||
+                !(+user.year > 1895) ||
+                !(user.name.length > 1) ||
+                !(NAME_PATTERN.test(user.name))
+        ) {
+            throw new Error('Object fields is wrong!');
+        }
+    });
+    initialState = parsedJSON;
+} catch(e: unknown) {
+    (window.localStorage as Storage).setItem('users', '[]');
+    initialState = [];
+}
 
 const _usersReducer = createReducer(initialState, 
     on(insertJson, (state: Users, { payload }): Users => ([

@@ -32,3 +32,20 @@ h2 {
 button {
     margin: 0 10px;
 }
+
+@media(max-width: 700px) {
+    .buttons {
+        flex-direction: column;
+    }
+    .operation-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+    .navigate-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+    button {
+        margin: 10px;
+    }
+}
