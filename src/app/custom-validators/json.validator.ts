@@ -14,6 +14,7 @@ export const jsonUserValidator: ValidatorFn = (control: AbstractControl): Valida
     try {
         const parsedJSON: ParsedUsers = JSON.parse(control.value);
         if (!(Array.isArray(parsedJSON))) throw new Error('Not array!');
+        if (parsedJSON.length === 0) throw new Error('Empty array!');
         parsedJSON.forEach((user: User) => {
             if (
                 Object.is(user, null) ||

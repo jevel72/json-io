@@ -48,7 +48,7 @@ export class InsertJsonComponent implements OnInit {
   }
 
   public get disabled(): boolean {
-    return this.dataInput.value === '' || this.requiredError || this.wrongJsonError;
+    return this.dataInput.value === '' || this.requiredError || this.wrongJsonError || this.dataInput.value === '[]';
   }
 
   public addSampleJson(): void {
